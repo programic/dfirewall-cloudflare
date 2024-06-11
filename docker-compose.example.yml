@@ -2,10 +2,10 @@ services:
   job:
     image: programic/dfirewall-cloudflare:latest
     environment:
-      AUTH_EMAIL: <Cloudflare Email>
-      AUTH_KEY: <Cloudflare Key>
-      ACCOUNT_ID: <Cloudflare Account ID>
-      LIST_ID: <Cloudflare List ID>
+      AUTH_EMAIL: <Auth Email>
+      AUTH_KEY: <Auth Key>
+      ACCOUNT_ID: <Account ID>
+      LIST_ID: <List ID>
       JOB_INTERVAL: "*/5 * * * *"
     build:
       context: .
