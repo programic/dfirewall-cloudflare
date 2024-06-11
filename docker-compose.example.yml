@@ -1,5 +1,5 @@
 services:
-  ip:
+  job:
     image: programic/dfirewall-cloudflare:latest
     environment:
       AUTH_EMAIL: <Cloudflare Email>
@@ -7,7 +7,7 @@ services:
       JOB_INTERVAL: "*/5 * * * *"
     build:
       context: .
-      dockerfile: ./ip.dockerfile
+      dockerfile: ./job.dockerfile
 
   watchtower:
     image: containrrr/watchtower

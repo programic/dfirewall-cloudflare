@@ -26,4 +26,4 @@ COPY src .
 # Install packages from Composer
 RUN composer install --no-dev --no-interaction
 
-CMD [ "bash", "cmd.sh"]
+CMD [ "bash", "init.sh"]
