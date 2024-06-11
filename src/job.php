@@ -4,12 +4,15 @@ require __DIR__ . '/vendor/autoload.php';
 
 $old = json_decode(file_get_contents('current_ip.json'));
 
-$client = new GuzzleHttp\Client();
-
 $cfAuthHeaders = [
     'X-Auth-Email' => getenv('AUTH_EMAIL'),
     'X-Auth-Key' => getenv('AUTH_KEY'),
 ];
+
+$cfAccountId = getenv('ACCOUNT_ID');
+$cfListId = getenv('LIST_ID');
+
+$client = new GuzzleHttp\Client();
 
 # Check current IP
 $response = $client->get('checkip.amazonaws.com');
@@ -25,7 +28,7 @@ if ($old->ip != $currentIp) {
     # If there is an old IP, delete it first
     if ($old->id) {
         try {
-            $client->delete('https://api.cloudflare.com/client/v4/accounts/6e05adcb1ece5983dd0a6e7c29ba0f1a/rules/lists/80d4cf20a595453fbd96a3d6f6329e91/items', [
+            $client->delete("https://api.cloudflare.com/client/v4/accounts/{$cfAccountId}/rules/lists/{$cfListId}/items", [
                 'headers' => $cfAuthHeaders + [
                     'Content-Type' => 'application/json',
                 ],
@@ -43,7 +46,7 @@ if ($old->ip != $currentIp) {
     }
 
     # Create new IP item
-    $client->post('https://api.cloudflare.com/client/v4/accounts/6e05adcb1ece5983dd0a6e7c29ba0f1a/rules/lists/80d4cf20a595453fbd96a3d6f6329e91/items', [
+    $client->post("https://api.cloudflare.com/client/v4/accounts/{$cfAccountId}/rules/lists/{$cfListId}/items", [
         'headers' => $cfAuthHeaders + [
             'Content-Type' => 'application/json',
         ],
@@ -59,7 +62,7 @@ if ($old->ip != $currentIp) {
 
     for ($i = 10; $i > 0; $i--) {
           
-        $response = $client->get('https://api.cloudflare.com/client/v4/accounts/6e05adcb1ece5983dd0a6e7c29ba0f1a/rules/lists/80d4cf20a595453fbd96a3d6f6329e91/items', [
+        $response = $client->get("https://api.cloudflare.com/client/v4/accounts/{$cfAccountId}/rules/lists/{$cfListId}/items", [
             'headers' => $cfAuthHeaders,
         ]);
         
