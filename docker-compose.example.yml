@@ -1,0 +1,16 @@
+services:
+  ip:
+    image: programic/dfirewall-cloudflare:latest
+    environment:
+      AUTH_EMAIL: <Cloudflare Email>
+      AUTH_KEY: <Cloudflare Key>
+      JOB_INTERVAL: "*/5 * * * *"
+    build:
+      context: .
+      dockerfile: ./ip.dockerfile
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30
