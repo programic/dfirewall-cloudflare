@@ -36,5 +36,5 @@ docker compose up -d
 
 # Run job manually
 ```bash
-docker compose exec ip php job.php
+docker compose exec job php job.php
 ```
