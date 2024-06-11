@@ -26,6 +26,7 @@
 ## 2. Build (optional)
 ```bash 
 docker compose build
+docker compose push
 ```
 
 ## 3. Deploy
