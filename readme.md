@@ -5,6 +5,7 @@
 2. Manage account -> Configurations -> Lists
 3. Create new list:
     * Identifier: public_ips
+4. Go to the newly created list and grab the Account ID and List ID from the url: `https://dash.cloudflare.com/<Account ID>/configurations/lists/<List ID>`
 
 ## 2. Create a WAF rule
 1. Go to https://dash.cloudflare.com
@@ -21,7 +22,7 @@
 
 ## 1. Prerequisites
 1. Copy `docker-compose.example.yml` to `docker-compose.yml`
-2. Edit `docker-compose.yml`
+3. Edit `docker-compose.yml` and fill in the Account ID and List ID from the step above. For the Auth Email and Auth Key, go to https://dash.cloudflare.com/profile/api-tokens and grab the Global API Key.
 
 ## 2. Build (optional)
 ```bash 
